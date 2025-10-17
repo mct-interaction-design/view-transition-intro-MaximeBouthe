@@ -1,14 +1,58 @@
+ @view-transition {
+    navigation: auto;
+}
+
+@keyframes fade-in {
+	from {
+	opacity: 0;
+}
+}
+
+@keyframes fade-out {
+	to {
+	opacity: 0;
+}
+}
+
+@keyframes slide-from-bottom {
+	from {
+	transform: translateY(30px)
+}
+}
+
+@keyframes slide-to-bottom {
+	to {
+	transform: translateY(30px)
+}
+}
+
+:view-transition-old(root) {
+	animation: 90ms var(--ease-in-1) both fade-out,
+	300ms var(--ease-out-3) both slide-to-bottom;
+}
+
+:view-transition-old(root) {
+	animation: 210ms var(--ease-in-1) 90ms both fade-in,
+	300ms var(--ease-out-3) both slide-from-bottom;
+}
+
 :root {
     --color-purple: oklch(0.44 0.23 311.11);
     --color-pink: oklch(0.66 0.26 16.42);
     --color-yellow: oklch(0.84 0.2 86.18);
     --color-ocean: oklch(0.7 0.25 151.84);
+    
+       /* easing curves */
+    --ease-in-1: cubic-bezier(0.25, 0, 1, 1);
+    --ease-out-1: cubic-bezier(0, 0, 0.75, 1);
+    --ease-in-out-3: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 /* reset */
 
 * {
     box-sizing: border-box;
+   
 }
 
 /* global page styles */
@@ -23,6 +67,10 @@ html {
 
 body {
     margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
 svg,
@@ -35,6 +83,7 @@ img {
 h1 {
     font-size: 6rem;
     margin: 0;
+    line-height: 1;
 }
 
 /* objects */
@@ -42,6 +91,18 @@ h1 {
 .list-reset {
     list-style: none;
     padding: 0;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }
 
 /* components */
@@ -70,3 +131,80 @@ h1 {
 
 .page__body,
 .page__back {}
+
+.nav__item {
+    height: 9rem;
+    aspect-ratio: 16/9;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    border-radius: 10px;
+}
+
+.nav__item--one {
+    background-color: red;
+}
+.nav__item--two {
+    background-color: blue;
+}   
+.nav__item--three {
+    background-color: green;
+}
+.nav__item--four {
+    background-color: orange;
+}
+
+.nav__link {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.nav__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.page {
+    width: calc(100vw - 10vw);
+    height: calc(100vh - 10vw);
+    border-radius: 50px;
+    display: grid;
+    place-items: center;
+    color: white;
+}
+
+.page--one {
+    background-color: red;
+}
+.page--two {
+    background-color: blue;
+}
+.page--three {
+    background-color: green;
+}
+.page--four {
+    background-color: orange;
+}
+
+.page__back {
+    grid-area: 1 / 1;
+    justify-self: end;
+    align-self: start;
+    margin: 3rem;
+    color: white;
+}
+
+.page__body {
+    grid-area: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
